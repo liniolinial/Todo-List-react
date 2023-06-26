@@ -1,0 +1,48 @@
+import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+export default class NewTodoForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      task: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value,
+    });
+  }
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const newTodo = { ...this.state, id: uuidv4() };
+    this.props.createTask(newTodo);
+    this.setState({
+      task: "",
+    });
+  }
+  // handleEdit(evt){
+  //  [evt.target]
+  // }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h4>New Todo</h4>
+        <div>
+          <label htmlFor='task'>
+            <input
+              type='text'
+              name='task'
+              value={this.state.task}
+              onChange={this.handleChange}
+              id='task'
+            />
+          </label>
+        </div>
+        <button>ADD TODO</button>
+      </form>
+    );
+  }
+}
