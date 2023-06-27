@@ -1,53 +1,49 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import NewTodoForm from "./NewTodoForm";
-// import "./TodoList.css";
+import "./TodoList.css";
 
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       todos: [],
-      message: "Test mes",
     };
-    this.create = this.create.bind(this);
-    this.remove = this.remove.bind(this);
-    this.update = this.update.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-  remove(id) {
+  handleRemove(id) {
     this.setState({
       todos: this.state.todos.filter((todo) => todo.id !== id),
     });
   }
 
-  // edit(id) {
-  //   const updatedTodos = this.state.todos.map((todo) => {
-  //     if (todo.id === id) {
-  //       return {
-  //         ...todo,
-  //         editing: true,
-  //       };
-  //     }
-  //     return todo;
-  //   });
-
-  //   this.setState({
-  //     todos: updatedTodos,
-  //   });
-  // }
-
-  create(newTodo) {
+  handleCreate(newTodo) {
     this.setState({
       todos: [...this.state.todos, newTodo],
     });
   }
 
-  update(updatedTodo, id) {
-    console.log(updatedTodo, id);
+  handleUpdate(updatedTodo, id) {
     const updatedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
         return updatedTodo;
+      } else {
+        return todo;
+      }
+    });
+    this.setState({
+      todos: updatedTodos,
+    });
+  }
+
+  handleToggle(id) {
+    const updatedTodos = this.state.todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
       } else {
         return todo;
       }
@@ -61,11 +57,12 @@ export default class TodoList extends Component {
     const todos = this.state.todos.map((todo) => (
       <Todo
         key={todo.id}
-        // id={todo.id}
-        // task={todo.task}
-        todo={todo}
-        update={this.update}
-        remove={this.remove}
+        id={todo.id}
+        task={todo.task}
+        completed={todo.completed}
+        onUpdate={this.handleUpdate}
+        onRemove={this.handleRemove}
+        onToggle={this.handleToggle}
       />
     ));
 
@@ -75,7 +72,7 @@ export default class TodoList extends Component {
         <h5>A Simple React Todo List App</h5>
         <hr className='line' />
         {todos}
-        <NewTodoForm createTask={this.create} />
+        <NewTodoForm onCreate={this.handleCreate} />
       </div>
     );
   }
