@@ -1,0 +1,7 @@
+.NewTodoList-container {
+  display: flex;
+  flex-direction: row;
+}
+.NewTodoList-container h4 {
+  padding-left: 40px;
+}/*# sourceMappingURL=NewTodoList.css.map */

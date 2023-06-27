@@ -1,0 +1,23 @@
+.TodoList-container {
+  text-align: left;
+  background-color: salmon;
+  color: white;
+  width: 23rem;
+  display: flex;
+  margin: auto;
+  padding: 40px 0;
+  flex-direction: column;
+}
+.TodoList-container h1 {
+  margin: 0;
+}
+.TodoList-container h1,
+.TodoList-container h5,
+.TodoList-container .line {
+  padding-left: 40px;
+  margin-bottom: 0;
+}
+
+.line {
+  color: white;
+}/*# sourceMappingURL=TodoList.css.map */

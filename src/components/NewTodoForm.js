@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "./NewTodoForm.css";
+
 import { v4 as uuidv4 } from "uuid";
 
 export default class NewTodoForm extends Component {
@@ -10,11 +12,13 @@ export default class NewTodoForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
     });
   }
+
   handleSubmit(evt) {
     evt.preventDefault();
     const newTodo = { ...this.state, id: uuidv4() };
@@ -23,14 +27,14 @@ export default class NewTodoForm extends Component {
       task: "",
     });
   }
-  // handleEdit(evt){
-  //  [evt.target]
-  // }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        className='NewTodoForm-primary-container'
+        onSubmit={this.handleSubmit}>
         <h4>New Todo</h4>
-        <div>
+        <div className='NewTodoForm-secondary-container'>
           <label htmlFor='task'>
             <input
               type='text'
@@ -40,8 +44,8 @@ export default class NewTodoForm extends Component {
               id='task'
             />
           </label>
+          <button>ADD TODO</button>
         </div>
-        <button>ADD TODO</button>
       </form>
     );
   }
