@@ -14,9 +14,11 @@ export default class Todo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
   }
+
   handleRemove() {
-    this.props.remove(this.props.id);
+    this.props.onRemove(this.props.id);
   }
+
   handleUpdate() {
     this.setState({
       editing: true,
@@ -26,6 +28,7 @@ export default class Todo extends Component {
   handleToggle(e) {
     this.props.onToggle(this.props.id);
   }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -43,12 +46,14 @@ export default class Todo extends Component {
       editing: false,
     });
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    console.log("TODO COMPONENT DID UPDATE");
+    console.log(prevProps.task);
+    console.log(this.props.task);
+  }
   render() {
-    let result;
-
     if (this.state.editing) {
-      result = (
+      return (
         <div>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor='task'>
@@ -64,8 +69,8 @@ export default class Todo extends Component {
           </form>
         </div>
       );
-      return result;
     }
+
     return (
       <div className='Todo-container'>
         <div>

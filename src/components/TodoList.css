@@ -12,12 +12,7 @@
   margin: 0;
 }
 .TodoList-container h1,
-.TodoList-container h5,
-.TodoList-container .line {
+.TodoList-container h5 {
   padding-left: 40px;
   margin-bottom: 0;
-}
-
-.line {
-  color: white;
 }/*# sourceMappingURL=TodoList.css.map */

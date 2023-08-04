@@ -40,6 +40,7 @@ export default class TodoList extends Component {
     });
   }
 
+  //todo: ein Obj von todos array
   handleToggle(id) {
     const updatedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
@@ -52,7 +53,11 @@ export default class TodoList extends Component {
       todos: updatedTodos,
     });
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    console.log("IN COMPONENT DID UPDATE");
+    console.log(prevState.todos);
+    console.log(this.state.todos);
+  }
   render() {
     const todos = this.state.todos.map((todo) => (
       <Todo
@@ -70,7 +75,6 @@ export default class TodoList extends Component {
       <div className='TodoList-container'>
         <h1>Todo List!</h1>
         <h5>A Simple React Todo List App</h5>
-        <hr className='line' />
         {todos}
         <NewTodoForm onCreate={this.handleCreate} />
       </div>
